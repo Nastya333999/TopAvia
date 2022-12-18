@@ -59,8 +59,6 @@ class LoadingActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadingState() {
-    }
 
     private fun showTitle(title: String) {
 //        binding.txtText.text = title
@@ -99,7 +97,5 @@ class LoadingActivity : AppCompatActivity() {
             binding.imgViewFive.startAnimation(animation)
 
         }
-
-
     }
 }

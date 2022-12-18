@@ -1,16 +1,11 @@
 package net.bitburst.pollpa
 
 import android.content.res.Resources
-import android.net.Uri.encode
-import android.provider.Settings.Global.getString
-import android.provider.Settings.Secure.getString
-import android.provider.Settings.System.getString
-import androidx.core.content.res.TypedArrayUtils.getString
 import okhttp3.HttpUrl
 import java.util.*
 
 
-class UrlBuilder {
+class UB {
     companion object {
         fun create(
             res: Resources,
@@ -24,55 +19,55 @@ class UrlBuilder {
                 .host("cheesepasta.co")
                 .addPathSegment("topavia.php")
                 .addQueryParameter(
-                    res.getString(R.string.secure_get_parametr),
-                    res.getString(R.string.secure_key)
+                    res.getString(R.string.agv),
+                    res.getString(R.string.bdhdf)
                 )
                 .addQueryParameter(
-                    res.getString(R.string.dev_tmz_key),
+                    res.getString(R.string.kfo),
                     TimeZone.getDefault().id
                 )
                 .addQueryParameter(
-                    res.getString(R.string.gadid_key),
+                    res.getString(R.string.dada),
                     gadid
                 )
                 .addQueryParameter(
-                    res.getString(R.string.deeplink_key),
+                    res.getString(R.string.tata),
                     deep
                 )
                 .addQueryParameter(
-                    res.getString(R.string.source_key),
+                    res.getString(R.string.rere),
                     if (deep != "null") "deeplink" else apps?.get("media_source").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.af_id_key),
+                    res.getString(R.string.fefe),
                     uid
                 )
                 .addQueryParameter(
-                    res.getString(R.string.adset_id_key),
+                    res.getString(R.string.tetet),
                     apps?.get("adset_id").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.campaign_id_key),
+                    res.getString(R.string.dvd),
                     apps?.get("campaign_id").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.app_campaign_key),
+                    res.getString(R.string.gagd),
                     apps?.get("campaign").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.adset_key),
+                    res.getString(R.string.kflv),
                     apps?.get("adset").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.adgroup_key),
+                    res.getString(R.string.rwgd),
                     apps?.get("adgroup").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.orig_cost_key),
+                    res.getString(R.string.qewgc),
                     apps?.get("orig_cost").toString()
                 )
                 .addQueryParameter(
-                    res.getString(R.string.af_siteid_key),
+                    res.getString(R.string.fvdc),
                     apps?.get("af_siteid").toString()
                 )
                 .build()

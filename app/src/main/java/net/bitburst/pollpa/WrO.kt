@@ -10,7 +10,7 @@ class WrO(context: Context, uid: String) {
         OneSignal.setExternalUserId(uid)
     }
 
-    fun send(campaign: String, deep: String) {
+    fun ss(campaign: String, deep: String) {
         when {
             campaign == "null" && deep == "null" -> {
                 OneSignal.sendTag("key2", "organic")

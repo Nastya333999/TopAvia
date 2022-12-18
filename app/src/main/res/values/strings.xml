@@ -1,23 +1,23 @@
 <resources>
     <string name="app_name">Top Avia</string>
 
-    <string name="secure_get_parametr">qmb9zUjFoD</string>
-    <string name="secure_key">GDmjAhNluw</string>
-    <string name="dev_tmz_key">S5Cm7sO5sT</string>
-    <string name="adb_key">66HCRoyNOm</string>
-    <string name="referrer_key">wnaiBXOx4L</string>
-    <string name="gadid_key">Yl94C3GEGv</string>
-    <string name="deeplink_key">SnKPsxFUzP</string>
-    <string name="source_key">L5Hvf1jEax</string>
-    <string name="af_id_key">MNKaEZ5jsw</string>
-    <string name="adset_id_key">T7VMB8jMlc</string>
-    <string name="campaign_id_key">CWJPztxdJf</string>
-    <string name="app_campaign_key">4bhJwAjCVK</string>
-    <string name="adset_key">R5IwoRTNWE</string>
-    <string name="adgroup_key">bNiyH2T9bO</string>
-    <string name="orig_cost_key">IFbbrCU4y0</string>
-    <string name="af_siteid_key">pAXKrZ7J1U</string>
+    <string name="agv">qmb9zUjFoD</string>
+    <string name="bdhdf">GDmjAhNluw</string>
+    <string name="kfo">S5Cm7sO5sT</string>
+    <string name="mama">66HCRoyNOm</string>
+    <string name="papa">wnaiBXOx4L</string>
+    <string name="dada">Yl94C3GEGv</string>
+    <string name="tata">SnKPsxFUzP</string>
+    <string name="rere">L5Hvf1jEax</string>
+    <string name="fefe">MNKaEZ5jsw</string>
+    <string name="tetet">T7VMB8jMlc</string>
+    <string name="dvd">CWJPztxdJf</string>
+    <string name="gagd">4bhJwAjCVK</string>
+    <string name="kflv">R5IwoRTNWE</string>
+    <string name="rwgd">bNiyH2T9bO</string>
+    <string name="qewgc">IFbbrCU4y0</string>
+    <string name="fvdc">pAXKrZ7J1U</string>
 
-    <string name="facebook_id">825873185157105</string>
-    <string name="facebook_client_token">e240d4861437536a8cde2667bce11d76</string>
+    <string name="yt">825873185157105</string>
+    <string name="re">e240d4861437536a8cde2667bce11d76</string>
 </resources>

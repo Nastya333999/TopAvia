@@ -33,29 +33,25 @@ class GActivity : AppCompatActivity() {
 
 
         initAdapter()
-        startTimer()
+        startTmr()
     }
 
     private fun initAdapter() {
 
-
         binding.itemsRVFirst.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.itemsRVFirst.adapter = ItemAdapter(value = viewModel.setInitData(), onClick = {
-            viewModel.imageClicked(it, 1)
-
+            viewModel.imgClicked(it, 1)
         })
 
         viewModel.positionFirst.observe(this) { positionInt ->
             binding.itemsRVFirst.smoothScrollToPosition(positionInt)
-
         }
 
         binding.itemsRVSecond.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.itemsRVSecond.adapter = ItemAdapter(value = viewModel.setInitData(), onClick = {
-            viewModel.imageClicked(it, 2)
-
+            viewModel.imgClicked(it, 2)
         })
 
         viewModel.positionSecond.observe(this) { positionInt ->
@@ -66,7 +62,7 @@ class GActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.itemsRVTherd.adapter = ItemAdapter(value = viewModel.setInitData(), onClick = {
 
-            viewModel.imageClicked(it, 3)
+            viewModel.imgClicked(it, 3)
         })
 
         viewModel.positionTherd.observe(this) { positionInt ->
@@ -93,7 +89,7 @@ class GActivity : AppCompatActivity() {
 
     }
 
-    private fun startTimer() {
+    private fun startTmr() {
         object : CountDownTimer(5000000000, 500) {
 
             override fun onTick(millisUntilFinished: Long) {

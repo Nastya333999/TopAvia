@@ -11,11 +11,9 @@ import android.webkit.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
-import net.bitburst.pollpa.App
-import net.bitburst.pollpa.GameFile
+import net.bitburst.pollpa.GF
 import net.bitburst.pollpa.R
-import net.bitburst.pollpa.data.Repository
-import net.bitburst.pollpa.databinding.ActivityWactivityBinding
+import net.bitburst.pollpa.data.Repo
 import net.bitburst.pollpa.view.G.GActivity
 import org.koin.android.ext.android.inject
 
@@ -23,7 +21,7 @@ class WActivity : AppCompatActivity() {
     private lateinit var immediateWebView: WebView
     private lateinit var valueCallback: ValueCallback<Array<Uri?>>
 
-    private val repository: Repository by inject()
+    private val repository: Repo by inject()
 
 
     val data = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) {
@@ -76,13 +74,13 @@ class WActivity : AppCompatActivity() {
                 super.onPageFinished(view, url)
                 Log.e("onPageFinished", "url is $url")
                 CookieManager.getInstance().flush()
-                if (("https://" + GameFile.BASE_URL) == url) {
+                if (("https://" + GF.BU) == url) {
                     val intent = Intent(this@WActivity, GActivity::class.java)
                     intent.flags =
                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 } else {
-                    repository.saveUrl(url)
+                    repository.saveU(url)
 //                    if (url.isNotEmpty() && !url.contains(GameFile.BASE_URL) && !(application as App).gameFile.exists()) {
 //                        (application as App).gameFile.writeData(url)
 //                    }

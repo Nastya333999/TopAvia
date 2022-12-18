@@ -1,6 +1,5 @@
 package net.bitburst.pollpa.view.spl
 
-import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.viewModelScope
@@ -8,23 +7,18 @@ import com.appsflyer.AppsFlyerLib
 import com.facebook.applinks.AppLinkData
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import net.bitburst.pollpa.*
-import net.bitburst.pollpa.data.Repository
-import net.bitburst.pollpa.data.RepositoryImpl
+import net.bitburst.pollpa.data.Repo
 import net.bitburst.pollpa.view.loading.LoadingActivity
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class MainViewModel(
     private val app: Application,
-    private val repository: Repository
+    private val repo: Repo
 ) : BaseViewModel(app) {
 
     private val _d = MutableStateFlow<MainState>(MainState.Loading)
@@ -42,8 +36,8 @@ class MainViewModel(
     private fun init(activity: LoadingActivity) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            if (repository.exists()) {
-                _d.emit(MainState.NavigateToWeb(repository.getUrl()!!))
+            if (repo.exists()) {
+                _d.emit(MainState.NavigateToWeb(repo.getU()!!))
             } else {
                 val apps = gAF(activity = activity)
                 val deep = deepFlow(activity = activity)
@@ -54,9 +48,9 @@ class MainViewModel(
                 val uId = AppsFlyerLib.getInstance().getAppsFlyerUID(activity)!!
                 _d.emit(MainState.FBState("Init step 2"))
 
-                WrO(app, adId).send(apps?.get("campaign").toString(), deep)
+                WrO(app, adId).ss(apps?.get("campaign").toString(), deep)
 
-                val url = UrlBuilder.create(
+                val url = UB.create(
                     res = app.resources,
                     gadid = adId,
                     apps = if (deep == "null") apps else null,

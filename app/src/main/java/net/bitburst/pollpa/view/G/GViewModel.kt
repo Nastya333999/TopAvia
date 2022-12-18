@@ -37,7 +37,7 @@ class GViewModel : ViewModel() {
         return allStates
     }
 
-    fun imageClicked(item: GItem, position: Int) {
+    fun imgClicked(item: GItem, position: Int) {
         when (position) {
             1 -> {
                 topImages.value = topImages.value?.copy(firstDrawable = item.resId)
