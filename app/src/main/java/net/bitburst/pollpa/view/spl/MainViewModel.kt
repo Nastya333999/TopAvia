@@ -19,7 +19,7 @@ import kotlin.coroutines.suspendCoroutine
 class MainViewModel(
     private val app: Application,
     private val repo: Repo
-) : BaseViewModel(app) {
+) : BW(app) {
 
     private val _d = MutableStateFlow<MainState>(MainState.Loading)
     val d = _d.asStateFlow()
@@ -58,7 +58,6 @@ class MainViewModel(
                     uid = if (deep == "null") uId else null
                 )
 
-                Log.e("URLSSS", "$url")
                 _d.emit(MainState.NavigateToWeb(url))
             }
         }
