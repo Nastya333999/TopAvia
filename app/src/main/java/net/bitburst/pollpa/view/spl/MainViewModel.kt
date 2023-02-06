@@ -3,9 +3,11 @@ package net.bitburst.pollpa.view.spl
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.appsflyer.AppsFlyerLib
 import com.facebook.applinks.AppLinkData
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.trident.media.helper.TridentConversionListener
+import com.trident.media.helper.TridentLib
+import com.trident.media.helper.network.models.postmodel.ConversionDataObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,23 +41,22 @@ class MainViewModel(
             if (repo.exists()) {
                 _d.emit(MainState.NavigateToWeb(repo.getU()!!))
             } else {
-                val apps = gAF(activity = activity)
+                val dataObj = conversionDataObject(activity = activity)
                 val deep = deepFlow(activity = activity)
 
                 _d.emit(MainState.FBState("Init step 1"))
 
                 val adId = AdvertisingIdClient.getAdvertisingIdInfo(activity).id.toString()
-                val uId = AppsFlyerLib.getInstance().getAppsFlyerUID(activity)!!
                 _d.emit(MainState.FBState("Init step 2"))
 
-                WrO(app, adId).ss(apps?.get("campaign").toString(), deep)
+                WrO(app, adId).ss(dataObj?.campaignName.toString(), deep)
 
                 val url = UB.create(
                     res = app.resources,
                     gadid = adId,
-                    apps = if (deep == "null") apps else null,
+                    tridentData = dataObj,
                     deep = deep,
-                    uid = if (deep == "null") uId else null
+                    extID = dataObj?.externalId.toString()
                 )
 
                 _d.emit(MainState.NavigateToWeb(url))
@@ -63,22 +64,17 @@ class MainViewModel(
         }
     }
 
-
-    private suspend fun gAF(activity: LoadingActivity): MutableMap<String, Any>? =
+    private suspend fun conversionDataObject(activity: LoadingActivity): ConversionDataObject? =
         suspendCoroutine { coroutine ->
-
-            val callback = object : AW {
-
-                override fun onConversionDataSuccess(convData: MutableMap<String, Any>?) {
-                    coroutine.resume(convData)
-                }
-
-                override fun onConversionDataFail(p0: String?) {
+            TridentLib.getInstance().init(activity, object : TridentConversionListener {
+                override fun onConversionDataFail(errorMessage: String) {
                     coroutine.resume(null)
                 }
-            }
-            AppsFlyerLib.getInstance().init("dLTnhryimVfxMsvHLrwsu6", callback, activity)
-            AppsFlyerLib.getInstance().start(activity)
+
+                override fun onConversionDataSuccess(data: ConversionDataObject?) {
+                    coroutine.resume(data)
+                }
+            })
         }
 
     private suspend fun deepFlow(activity: LoadingActivity): String =

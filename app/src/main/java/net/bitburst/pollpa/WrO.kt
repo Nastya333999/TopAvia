@@ -10,17 +10,13 @@ class WrO(context: Context, uid: String) {
         OneSignal.setExternalUserId(uid)
     }
 
-    fun ss(campaign: String, deep: String) {
-        when {
-            campaign == "null" && deep == "null" -> {
-                OneSignal.sendTag("key2", "organic")
-            }
-            deep != "null" -> {
-                OneSignal.sendTag("key2", deep.replace("myapp://", "").substringBefore("/"))
-            }
-            campaign != "null" -> {
-                OneSignal.sendTag("key2", campaign.substringBefore("_"))
-            }
+    fun ss(campaignName: String, deep: String) {
+        if (deep != "null") {
+            deep.replace("myapp://", "").substringBefore("/")
+        } else if (campaignName != "null") {
+            OneSignal.sendTag("key2", campaignName.substringBefore("_"))
+        } else {
+            OneSignal.sendTag("key2", "organic")
         }
     }
 }
